@@ -44,3 +44,6 @@ def test_shelter_dequeue_empty():
     shelter = AnimalShelter()
     dequeued = shelter.shelter_dequeue('dog')
     assert dequeued == None
+
+    """DONE
+    """
