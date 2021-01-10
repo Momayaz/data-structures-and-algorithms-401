@@ -6,3 +6,4 @@ created a function that takes a paragraph and splits the paragraph count repetit
 
 ## Solution:
 ![image](assets/repeated_word.jpg)
+___
