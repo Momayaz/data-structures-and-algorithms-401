@@ -1,3 +1,4 @@
+
 # class Node:
 class Node:
     """ Class for the Node instances"""
@@ -188,15 +189,3 @@ if __name__ == "__main__":
 
     l_list1 = create_list_append(['a','b','c','d','e'])
     print(l_list1.length_ll())
-    # l_list2 = create_list_append(['f','g','h','i','j'])
-    # ref_to_head = zip_Lists(l_list1, l_list2)
-    # print(l_list1)
-    # print(ref_to_head.value)
-    # l_list11 = create_list_append([1,3,5,7.9])
-    # l_list22 = create_list_append([2,4,6,8,10])
-    # ref_to_head2 = zip_Lists(l_list11, l_list22)
-    # print(l_list11)
-    # print(ref_to_head2.value)
-    # create_list_insert([1,2,3,4,5])
-    # print(create_list_insert([1,2,3,4,5]).__str__())
-    # print(create_list_insert([1,2,3,4,5]).includes(4))
