@@ -84,37 +84,7 @@ class Graph:
 
         return vertices
 
-    def depth_first(self, starting_vertex):
-        """
-        Method to do depth-first traversal on a graph.
-        Input: starting vertex
-        Output: list of vertices in the depth-first order
-        """
-
-        vertices = []
-        depth = Stack()
-
-        if starting_vertex not in self._adjacency_list:
-            raise ValueError
-        
-        depth.push(starting_vertex)
-
-        while not depth.is_empty():
-           top_vertex = depth.pop()
-           vertices.append(top_vertex.value)
-           top_node_neighbors = self.get_neighbors(top_vertex)
-
-           for neighbor in top_node_neighbors[::-1]:
-               if not neighbor[0].visited:
-                   top_vertex.visited = True
-                   neighbor[0].visited = True
-
-                   depth.push(neighbor[0])
-
-        for node in self._adjacency_list:
-            node.visited = False
-
-        return vertices
+   
 
 
 
