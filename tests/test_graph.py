@@ -294,3 +294,91 @@ def test_breadth_first_check_visited():
 
     vertices_lst = graph.breadth_first(banana)
     assert vertices_lst == [banana, apple, strawberry, tomato]
+def test_depth_first():
+    graph = Graph()
+
+    banana = graph.add_node('banana')
+
+    apple = graph.add_node('apple')
+
+    strawberry = graph.add_node('strawberry')
+    tomato = graph.add_node('tomato')
+
+    graph.add_edge(banana, apple)
+    graph.add_edge(apple, strawberry)
+    graph.add_edge(banana, tomato)
+    vertices_lst = graph.depth_first(banana)
+
+    assert vertices_lst == [banana.value, apple.value, strawberry.value, tomato.value]
+
+def test_depth_first_another_case():
+    graph = Graph()
+
+    a = graph.add_node('a')
+    b = graph.add_node('b')
+    c = graph.add_node('c')
+    d = graph.add_node('d')
+    e = graph.add_node('e')
+    f = graph.add_node('f')
+
+    graph.add_edge(a, b)
+    graph.add_edge(a, c)
+    graph.add_edge(a, d)
+    graph.add_edge(c, e)
+    graph.add_edge(e, f)
+
+    vertices_lst = graph.depth_first(a)
+
+    assert vertices_lst == [a.value, b.value, c.value, e.value, f.value, d.value]
+
+def test_depth_first_xhallenge_example():
+
+    graph = Graph()
+
+    a = graph.add_node('a')
+    b = graph.add_node('b')
+    c = graph.add_node('c')
+    d = graph.add_node('d')
+    e = graph.add_node('e')
+    f = graph.add_node('f')
+    g = graph.add_node('g')
+    h = graph.add_node('h')
+
+    graph.add_edge(a, b)
+    graph.add_edge(b, c)
+    graph.add_edge(b, d)
+    graph.add_edge(c, g)
+    graph.add_edge(a, d)
+    graph.add_edge(d, e)
+    graph.add_edge(d, h)
+    graph.add_edge(d, f)
+
+    graph.add_edge(f, h)
+
+    vertices_lst = graph.depth_first(a)
+
+    assert vertices_lst == [a.value, b.value, c.value, g.value, d.value, e.value, h.value, f.value]
+
+
+def test_deapth_first_empty_graph():
+
+    graph = Graph()
+
+    banana = Vertex("banana")
+    with pytest.raises(ValueError):
+        vertices_lst = graph.depth_first(banana)
+
+def test_depth_first_given_vertex_not_in_graph():
+
+    graph = Graph()
+
+    a = graph.add_node('a')
+    b = graph.add_node('b')
+    c = graph.add_node('c')
+    d = Vertex('d')
+
+    graph.add_edge(a, b)
+    graph.add_edge(b, c)
+
+    with pytest.raises(ValueError):
+        vertices_lst = graph.depth_first(d)
