@@ -1,5 +1,8 @@
 # Stacks and Queues
 
+
+### Auth: Momayaz Aldoos.
+
 Ih this project, we created a data structure called **Stack** and **Queue** in Python. We used three classes, _Node_ and _Queue_, and _Stack_.
 
 **Node** included the following:
