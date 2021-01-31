@@ -1,117 +1,119 @@
-from data_structures_and_algorithms_401.stacks_and_qeueus.stacks_and_queues import Node, Stack, Queue
+from data_structures.stacks_and_queues.stacks_and_queues import Stack, Queue
 
+import pytest
 
-def create_stack(nodes):
-    """helper function to create a stack"""
-    test_stack = Stack()
-    for el in nodes:
-        test_stack.push(el)
-    return test_stack
+"""
+*Queue* test cases:
+    1. Can successfully enqueue into a queue
+    2. Can successfully enqueue multiple values into a queue
+    3. Can successfully dequeue out of a queue the expected value
+    4. Can successfully peek into a queue, seeing the expected value
+    5. Can successfully empty a queue after multiple dequeues
+    6. Can successfully instantiate an empty queue
+    7. Calling dequeue or peek on empty queue raises exception
+"""
 
+def test_enqueue_one():
+    queue = Queue()
+    queue.enqueue(7)
+    assert queue.rear.value == 7
 
-def test_Node_created():
-    node_a = Node('a')
-    assert 'a' == node_a.value
-    assert None == node_a.next
+def test_enqueue_multiple():
+    queue = Queue()
+    queue.enqueue(7)
+    queue.enqueue(3)
+    assert queue.rear.value == 3
+    assert queue.front.value == 7
 
-def test_stack_empty():
-    test_stack = Stack()
-    assert test_stack.top == None
-
-def test_stack_push():
-
-    test_stack = Stack()
-    assert test_stack.top == None
-    test_stack.push(5)
-    assert test_stack.top.value == 5
-    test_stack.push('b')
-    assert test_stack.top.value == 'b'
-    test_stack.push('c')
-    assert test_stack.top.value == 'c'
-
-def test_stack_pop():
-    test_stack = create_stack(['a', 'b', 'c', 'd'])
-    assert test_stack.pop() == 'd'
-    assert test_stack.top.value == 'c'
-    assert test_stack.top.next.value == 'b'
-    test_stack.pop()
-    test_stack.pop()
-    test_stack.pop()
-    assert test_stack.peek() == None
-
-def test_stack_peek():
-    test_stack = create_stack(['a', 'b', 'c', 'd'])
-    assert test_stack.peek() == 'd'
-    test_stack.pop()
-    assert test_stack.peek() == 'c'
-    test_stack.pop()
-    test_stack.pop()
-    test_stack.pop()
-    test_stack.pop()
-    assert test_stack.peek() == None
-
-def test_stack_is_empty():
-    test_stack = create_stack(['a', 'b', 'c', 'd'])
-    assert test_stack.is_empty() == False
-    test_stack = Stack()
-    assert test_stack.is_empty() == True
-
-
-def create_queue(nodes):
-    """helper function to create a queue"""
-    test_queue = Queue()
-    for el in nodes:
-        test_queue.enqueue(el)
-    return test_queue
-
-
-def test_queue_empty():
-    test_queue = Queue()
-    assert test_queue.front == None
-    assert test_queue.rear == None
-
-def test_queue_enqueu():
-    test_queue = Queue()
-    assert test_queue.front == None
-    test_queue.enqueue(5)
-    assert test_queue.front.value == 5
-    test_queue.enqueue('b')
-    assert test_queue.rear.value == 'b'
-    assert test_queue.front.value == 5
-    test_queue.enqueue('c')
-    assert test_queue.rear.value == 'c'
-    assert test_queue.front.value == 5
-
-def test_queue_dequeue():
-    test_queue = create_queue(['a', 'b', 'c', 'd'])
-    assert test_queue.dequeue() == 'a'
-    assert test_queue.front.value == 'b'
-    assert test_queue.front.next.value == 'c'
-    test_queue.dequeue()
-    test_queue.dequeue()
-    test_queue.dequeue()
-    assert test_queue.peek() == None
+def test_dequeue():
+    queue = Queue()
+    queue.enqueue(7)
+    queue.enqueue(3)
+    queue.dequeue()
+    assert queue.front.value == 3
 
 def test_queue_peek():
-    test_queue = create_queue(['a', 'b', 'c', 'd'])
-    assert test_queue.peek() == 'a'
-    test_queue.dequeue()
-    assert test_queue.peek() == 'b'
-    test_queue.dequeue()
-    test_queue.dequeue()
-    test_queue.dequeue()
-    assert test_queue.peek() == None
+    queue = Queue()
+    queue.enqueue(7)
+    queue.enqueue(3)
+    assert queue.peek() == 7
 
-def test_queue_is_empty():
-    test_queue = create_queue(['a', 'b', 'c', 'd'])
-    assert test_queue.is_empty() == False
-    test_queue = Stack()
-    assert test_queue.is_empty() == True
+def test_is_empty():
+    queue = Queue()
+    queue.enqueue(7)
+    queue.enqueue(3)
+    queue.dequeue()
+    queue.dequeue()
+    assert queue.isEmpty() == True
 
-def test_queue_one_el():
+def test_init():
+    queue = Queue()
+    assert queue.front == None
+    assert queue.rear == None
 
-    test_queue = create_queue([1])
+def test_queue_empty_exception():
+    queue = Queue()
+    with pytest.raises(Exception):
+        assert queue.dequeue()
+    with pytest.raises(Exception):
+        assert queue.peek()
 
-    assert test_queue.is_empty() == False
-    assert test_queue.rear.value == 1
-    assert test_queue.front.value == 1
+###############################################
+
+"""
+*Stack* test cases:
+    1. Can successfully push onto a stack
+    2. Can successfully push multiple values onto a stack
+    3. Can successfully pop off the stack
+    4. Can successfully empty a stack after multiple pops
+    5. Can successfully peek the next item on the stack
+    6. Can successfully instantiate an empty stack
+    7. Calling pop or peek on empty stack raises exception
+"""
+
+def test_push_one():
+    stack = Stack()
+    stack.push(7)
+    assert stack.top.value == 7
+
+
+def test_push_multiple():
+    stack = Stack()
+    stack.push(7)
+    stack.push(3)
+    assert stack.top.value == 3
+
+def test_pop():
+    stack = Stack()
+    stack.push(7)
+    stack.push(3)
+    stack.pop()
+    assert stack.top.value == 7
+
+def test_pop_empty():
+    stack = Stack()
+    stack.push(7)
+    stack.push(3)
+    stack.pop()
+    stack.pop()
+    assert stack.isEmpty() == True
+
+def test_stack_peek():
+    stack = Stack()
+    stack.push(7)
+    stack.push(3)
+    assert stack.peek() == 3
+
+def test_stack_init():
+    stack = Stack()
+    assert stack.top == None
+
+def test_stack_empty_exception():
+    stack = Stack()
+    with pytest.raises(Exception):
+        assert stack.pop()
+    with pytest.raises(Exception):
+        assert stack.peek()
+
+
+
